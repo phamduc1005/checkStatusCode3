@@ -90,8 +90,8 @@ from .serializers import CheckUrlSerializer
 
 @api_view(['GET'])
 def checkLastUrlAllError(request):
-    # nameTest = ['pmp', 'cna', 'aws', 'drivingtheory', 'ged', 'ptce', 'realestate', 'teas', 'servsafe']
-    nameTest = ['pmp', 'servsafe']
+    nameTest = ['pmp', 'cna', 'aws', 'drivingtheory', 'ged', 'ptce', 'realestate', 'teas', 'servsafe']
+    # nameTest = ['pmp', 'servsafe']
     listobjects = []
     
     for element in nameTest:
@@ -108,6 +108,7 @@ def checksAllUrlErrorOfAWeb(request, nameTest):
     serializer = CheckUrlSerializer(checkurl, many=True)
     return Response(serializer.data)
 
+
 @api_view(['POST'])
 def checkOfAWebsite(request):
     def getUrlsFromSitemap(xmlUrl):
@@ -122,33 +123,33 @@ def checkOfAWebsite(request):
         return links
 
 
-    a = CheckUrlSerializer(data=request.data)
-    if a.is_valid():
-        a.save()
+    addTest = CheckUrlSerializer(data=request.data)
+    if addTest.is_valid():
+        addTest.save()
     
-    b = a.data['id']
-    c = CheckUrl.objects.get(id = b)
+    idTest = addTest.data['id']
+    newTest = CheckUrl.objects.get(id = idTest)
 
-    if c.test == 'pmp':
+    if newTest.test == 'pmp':
         listUrls = ['https://pmp-testprep.com/post-sitemap.xml']
-    elif c.test == 'cna':
+    elif newTest.test == 'cna':
         listUrls = ['https://cna-prep.com/post-sitemap.xml', 'https://cna-prep.com/page-sitemap.xml']
-    elif c.test == 'aws':
+    elif newTest.test == 'aws':
         listUrls = ['https://aws-prep.com/post-sitemap.xml', 'https://aws-prep.com/page-sitemap.xml']
-    elif c.test == 'drivingtheory':
+    elif newTest.test == 'drivingtheory':
         listUrls = ['https://drivingtheory-tests.com/post-sitemap.xml', 'https://drivingtheory-tests.com/page-sitemap.xml']
-    elif c.test == 'ged':
+    elif newTest.test == 'ged':
         listUrls = ['https://ged-testprep.com/post-sitemap.xml', 'https://ged-testprep.com/page-sitemap.xml']
-    elif c.test == 'ptce':
+    elif newTest.test == 'ptce':
         listUrls = ['https://ptceprep.com/post-sitemap.xml', 'https://ptceprep.com/page-sitemap.xml']
-    elif c.test == 'realestate':
+    elif newTest.test == 'realestate':
         listUrls = ['https://realestate-prep.com/post-sitemap.xml', 'https://realestate-prep.com/page-sitemap.xml']
-    elif c.test == 'teas':
+    elif newTest.test == 'teas':
         listUrls = ['https://teas-prep.com/post-sitemap.xml', 'https://teas-prep.com/page-sitemap.xml']
-    elif c.test == 'servsafe':
+    elif newTest.test == 'servsafe':
         listUrls = ['https://servsafe-prep.com/post-sitemap.xml']
-    # elif c.test == 'all':
-    #     listUrls = []
+    elif newTest.test == 'all':
+        listUrls = ['https://pmp-testprep.com/post-sitemap.xml','https://cna-prep.com/post-sitemap.xml','https://aws-prep.com/post-sitemap.xml','https://drivingtheory-tests.com/post-sitemap.xml','https://ged-testprep.com/post-sitemap.xml','https://ptceprep.com/post-sitemap.xml','https://realestate-prep.com/post-sitemap.xml','https://teas-prep.com/post-sitemap.xml','https://servsafe-prep.com/post-sitemap.xml']
 
 
     for xmlUrl in listUrls:
@@ -159,9 +160,9 @@ def checkOfAWebsite(request):
             statusCode = response.status_code
             
             if statusCode in range(200, 300):
-                c.error.create(status = statusCode, url = link)
+                newTest.error.create(status = statusCode, url = link)
 
-    d = CheckUrl.objects.get(id = b)
-    serializer = CheckUrlSerializer(d)
+    # d = CheckUrl.objects.get(id = idTest)
+    serializer = CheckUrlSerializer(newTest)
 
     return Response(serializer.data)
