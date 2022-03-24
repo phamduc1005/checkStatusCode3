@@ -82,15 +82,15 @@ def checkOfAWebsite(request):
         listUrls = ['https://asvab-prep.com/post-sitemap.xml', 'https://asvab-prep.com/page-sitemap.xml'] 
 
 
-    for xmlUrl in listUrls:
-        links = getUrlsFromSitemap(xmlUrl)
+    # for xmlUrl in listUrls:
+    links = getUrlsFromSitemap(listUrls)
+    
+    for link in links:
+        response = requests.get(link)
+        statusCode = response.status_code
         
-        for link in links:
-            response = requests.get(link)
-            statusCode = response.status_code
-            
-            if statusCode not in range(200, 300):
-                newTest.error.create(status = statusCode, url = link)
+        if statusCode not in range(200, 300):
+            newTest.error.create(status = statusCode, url = link)
   
     serializer = CheckUrlSerializer(newTest)
 
