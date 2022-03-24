@@ -1,5 +1,3 @@
-# from django.shortcuts import render
-# from django.http import HttpResponse
 from bs4 import BeautifulSoup
 import requests
 from .models import CheckUrl, UrlError
@@ -52,7 +50,7 @@ def checkOfAWebsite(request):
     newTest = CheckUrl.objects.get(id = idTest)
 
     if newTest.test == 'pmp':
-        listUrls = ['https://pmp-testprep.com/page-sitemap.xml']
+        listUrls = ['https://pmp-testprep.com/post-sitemap.xml', 'https://pmp-testprep.com/page-sitemap.xml']
     
     elif newTest.test == 'cna':
         listUrls = ['https://cna-prep.com/post-sitemap.xml', 'https://cna-prep.com/page-sitemap.xml']
@@ -93,7 +91,7 @@ def checkOfAWebsite(request):
             response = requests.get(link)
             statusCode = response.status_code
             
-            if statusCode > 299:
+            if statusCode not in range(200, 300):
                 newTest.error.create(status = statusCode, url = link)
     
         serializer = CheckUrlSerializer(newTest)
