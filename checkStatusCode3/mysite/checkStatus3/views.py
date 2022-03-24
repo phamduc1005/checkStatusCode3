@@ -93,7 +93,7 @@ def checkOfAWebsite(request):
             response = requests.get(link)
             statusCode = response.status_code
             
-            if statusCode not in range(200, 300):
+            if statusCode > 299:
                 newTest.error.create(status = statusCode, url = link)
     
         serializer = CheckUrlSerializer(newTest)
