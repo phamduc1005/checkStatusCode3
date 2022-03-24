@@ -52,23 +52,32 @@ def checkOfAWebsite(request):
     newTest = CheckUrl.objects.get(id = idTest)
 
     if newTest.test == 'pmp':
-        listUrls = ['https://pmp-testprep.com/post-sitemap.xml']
+        listUrls = ['https://pmp-testprep.com/post-sitemap.xml', 'https://pmp-testprep.com/page-sitemap.xml']
+    
     elif newTest.test == 'cna':
-        listUrls = ['https://cna-prep.com/post-sitemap.xml']
+        listUrls = ['https://cna-prep.com/post-sitemap.xml', 'https://cna-prep.com/page-sitemap.xml']
+    
     elif newTest.test == 'aws':
-        listUrls = ['https://aws-prep.com/post-sitemap.xml']
+        listUrls = ['https://aws-prep.com/post-sitemap.xml', 'https://aws-prep.com/page-sitemap.xml']
+    
     elif newTest.test == 'drivingtheory':
-        listUrls = ['https://drivingtheory-tests.com/post-sitemap.xml']
+        listUrls = ['https://drivingtheory-tests.com/post-sitemap.xml', 'https://drivingtheory-tests.com/page-sitemap.xml']
+    
     elif newTest.test == 'ged':
-        listUrls = ['https://ged-testprep.com/post-sitemap.xml']
+        listUrls = ['https://ged-testprep.com/post-sitemap.xml', 'https://ged-testprep.com/page-sitemap.xml']
+    
     elif newTest.test == 'ptce':
-        listUrls = ['https://ptceprep.com/post-sitemap.xml']
+        listUrls = ['https://ptceprep.com/post-sitemap.xml', 'https://ptceprep.com/page-sitemap.xml']
+    
     elif newTest.test == 'realestate':
-        listUrls = ['https://realestate-prep.com/post-sitemap.xml']
+        listUrls = ['https://realestate-prep.com/post-sitemap.xml', 'https://realestate-prep.com/page-sitemap.xml']
+    
     elif newTest.test == 'teas':
-        listUrls = ['https://teas-prep.com/post-sitemap.xml']
+        listUrls = ['https://teas-prep.com/post-sitemap.xml', 'https://teas-prep.com/page-sitemap.xml']
+    
     elif newTest.test == 'servsafe':
-        listUrls = ['https://servsafe-prep.com/post-sitemap.xml']
+        listUrls = ['https://servsafe-prep.com/post-sitemap.xml', 'https://servsafe-prep.com/page-sitemap.xml']
+    
     elif newTest.test == 'asvab':
         listUrls = ['https://asvab-prep.com/post-sitemap.xml', 'https://asvab-prep.com/page-sitemap.xml'] 
 
