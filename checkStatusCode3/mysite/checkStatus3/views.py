@@ -52,7 +52,7 @@ def checkOfAWebsite(request):
     newTest = CheckUrl.objects.get(id = idTest)
 
     if newTest.test == 'pmp':
-        listUrls = ['https://pmp-testprep.com/page-sitemap.xml']
+        listUrls = 'https://pmp-testprep.com/page-sitemap.xml'
     
     elif newTest.test == 'cna':
         listUrls = ['https://cna-prep.com/post-sitemap.xml', 'https://cna-prep.com/page-sitemap.xml']
