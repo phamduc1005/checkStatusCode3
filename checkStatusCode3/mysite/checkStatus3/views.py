@@ -52,7 +52,7 @@ def checkOfAWebsite(request):
     newTest = CheckUrl.objects.get(id = idTest)
 
     if newTest.test == 'pmp':
-        listUrls = 'https://pmp-testprep.com/page-sitemap.xml'
+        listUrls = ['https://pmp-testprep.com/page-sitemap.xml']
     
     elif newTest.test == 'cna':
         listUrls = ['https://cna-prep.com/post-sitemap.xml', 'https://cna-prep.com/page-sitemap.xml']
@@ -80,18 +80,22 @@ def checkOfAWebsite(request):
     
     elif newTest.test == 'asvab':
         listUrls = ['https://asvab-prep.com/post-sitemap.xml', 'https://asvab-prep.com/page-sitemap.xml'] 
+ 
+    elif newTest.test == 'all':
+        listUrls = ['https://pmp-testprep.com/post-sitemap.xml','https://cna-prep.com/post-sitemap.xml','https://aws-prep.com/post-sitemap.xml','https://drivingtheory-tests.com/post-sitemap.xml','https://ged-testprep.com/post-sitemap.xml','https://ptceprep.com/post-sitemap.xml','https://realestate-prep.com/post-sitemap.xml','https://teas-prep.com/post-sitemap.xml','https://servsafe-prep.com/post-sitemap.xml']
 
 
-    # for xmlUrl in listUrls:
-    links = getUrlsFromSitemap(listUrls)
-    
-    for link in links:
-        response = requests.get(link)
-        statusCode = response.status_code
+
+    for xmlUrl in listUrls:
+        links = getUrlsFromSitemap(xmlUrl)
         
-        if statusCode not in range(200, 300):
-            newTest.error.create(status = statusCode, url = link)
-  
-    serializer = CheckUrlSerializer(newTest)
+        for link in links:
+            response = requests.get(link)
+            statusCode = response.status_code
+            
+            if statusCode not in range(200, 300):
+                newTest.error.create(status = statusCode, url = link)
+    
+        serializer = CheckUrlSerializer(newTest)
 
     return Response(serializer.data)
