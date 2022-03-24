@@ -69,9 +69,8 @@ def checkOfAWebsite(request):
         listUrls = ['https://teas-prep.com/post-sitemap.xml']
     elif newTest.test == 'servsafe':
         listUrls = ['https://servsafe-prep.com/post-sitemap.xml']
-    
-    elif newTest.test == 'all':
-        listUrls = ['https://servsafe-prep.com/post-sitemap.xml','https://teas-prep.com/post-sitemap.xml','https://realestate-prep.com/post-sitemap.xml','https://ptceprep.com/post-sitemap.xml','https://ged-testprep.com/post-sitemap.xml','https://drivingtheory-tests.com/post-sitemap.xml','https://aws-prep.com/post-sitemap.xml','https://cna-prep.com/post-sitemap.xml','https://pmp-testprep.com/post-sitemap.xml'] 
+    elif newTest.test == 'asvab':
+        listUrls = ['https://asvab-prep.com/post-sitemap.xml', 'https://asvab-prep.com/page-sitemap.xml'] 
 
 
     for xmlUrl in listUrls:
